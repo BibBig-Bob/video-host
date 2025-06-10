@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid Texture Random</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            padding: 30px 0;
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+        
+        .video-card {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .video-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            background: rgba(255, 255, 255, 0.12);
+        }
+        
+        .video-title {
+            padding: 18px;
+            font-size: 1.1rem;
+            text-align: center;
+            font-weight: 500;
+            background: rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        
+        .video-container {
+            position: relative;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+        }
+        
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            background: #000;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: center;
+            padding: 15px;
+            gap: 10px;
+            background: rgba(0, 0, 0, 0.25);
+        }
+        
+        .btn {
+            background: rgba(255, 255, 255, 0.15);
+            border: none;
+            color: white;
+            padding: 10px 16px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+        }
+        
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: scale(1.05);
+        }
+        
+        .btn i {
+            font-size: 1.1rem;
+        }
+        
+        .btn-play {
+            background: rgba(76, 175, 80, 0.7);
+        }
+        
+        .btn-play:hover {
+            background: rgba(76, 175, 80, 0.9);
+        }
+        
+        .btn-pause {
+            background: rgba(244, 67, 54, 0.7);
+        }
+        
+        .btn-pause:hover {
+            background: rgba(244, 67, 54, 0.9);
+        }
+        
+        .btn-fullscreen {
+            background: rgba(33, 150, 243, 0.7);
+        }
+        
+        .btn-fullscreen:hover {
+            background: rgba(33, 150, 243, 0.9);
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 30px;
+            font-size: 1.1rem;
+            opacity: 0.8;
+            margin-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        @media (max-width: 768px) {
+            .video-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .btn {
+                padding: 8px 12px;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-video"></i> Grid Texture Random</h1>
+            <p class="subtitle">This page displays multiple video files. Click the play button to watch them. It supports full screen playback and individual control of each video.</p>
+        </header>
+        
+        <div class="video-grid">
+            <!-- 视频卡片将通过JavaScript动态生成 -->
+        </div>
+        
+        <div class="footer">
+            <p>Video gallery display page | Supports all modern browsers | Responsive design</p>
+        </div>
+    </div>
+
+    <script>
+        // 视频文件列表
+        const videos = [
+            "grid.mp4",
+            "grid_camRandom.mp4",
+            "grid_camRandom_changing.mp4",
+            "grid_changing.mp4",
+            "grid_color.mp4",
+            "grid_color_camRandom.mp4",
+            "grid_color_camRandom_changing.mp4",
+            "grid_color_changing.mp4"
+        ];
+        
+        // 友好的视频标题
+        const videoTitles = {
+            "grid.mp4": "Grid texture randomization",
+            "grid_camRandom.mp4": "Grid + Camera Offset",
+            "grid_camRandom_changing.mp4": "Gird with changing angle + Camera Offset",
+            "grid_changing.mp4": "Gird with changing angle",
+            "grid_color.mp4": "Grid + Color randomization",
+            "grid_color_camRandom.mp4": "Grid + Color randomization + Camera Offset",
+            "grid_color_camRandom_changing.mp4": "Gird with changing angle + Color randomization + Camera Offset",
+            "grid_color_changing.mp4": "Gird with changing angle + Color randomization"
+        };
+        
+        // 获取视频网格容器
+        const videoGrid = document.querySelector('.video-grid');
+        
+        // 为每个视频创建卡片
+        videos.forEach(video => {
+            // 创建卡片容器
+            const card = document.createElement('div');
+            card.className = 'video-card';
+            
+            // 创建标题
+            const title = document.createElement('div');
+            title.className = 'video-title';
+            title.textContent = videoTitles[video] || video.replace(/^\.\\/, '');
+            
+            // 创建视频容器
+            const videoContainer = document.createElement('div');
+            videoContainer.className = 'video-container';
+            
+            // 创建视频元素
+            const videoElement = document.createElement('video');
+            videoElement.src = video;
+            videoElement.controls = false;
+            
+            // 创建控制按钮
+            const controls = document.createElement('div');
+            controls.className = 'controls';
+            
+            const playBtn = document.createElement('button');
+            playBtn.className = 'btn btn-play';
+            playBtn.innerHTML = '<i class="fas fa-play"></i> Start';
+            
+            const pauseBtn = document.createElement('button');
+            pauseBtn.className = 'btn btn-pause';
+            pauseBtn.innerHTML = '<i class="fas fa-pause"></i> Stop';
+            
+            const fullscreenBtn = document.createElement('button');
+            fullscreenBtn.className = 'btn btn-fullscreen';
+            fullscreenBtn.innerHTML = '<i class="fas fa-expand"></i> Full Screen';
+            
+            // 添加事件监听器
+            playBtn.addEventListener('click', () => {
+                videoElement.play();
+            });
+            
+            pauseBtn.addEventListener('click', () => {
+                videoElement.pause();
+            });
+            
+            fullscreenBtn.addEventListener('click', () => {
+                if (videoElement.requestFullscreen) {
+                    videoElement.requestFullscreen();
+                } else if (videoElement.mozRequestFullScreen) {
+                    videoElement.mozRequestFullScreen();
+                } else if (videoElement.webkitRequestFullscreen) {
+                    videoElement.webkitRequestFullscreen();
+                } else if (videoElement.msRequestFullscreen) {
+                    videoElement.msRequestFullscreen();
+                }
+            });
+            
+            // 组装控件
+            controls.appendChild(playBtn);
+            controls.appendChild(pauseBtn);
+            controls.appendChild(fullscreenBtn);
+            
+            // 组装视频容器
+            videoContainer.appendChild(videoElement);
+            
+            // 组装卡片
+            card.appendChild(title);
+            card.appendChild(videoContainer);
+            card.appendChild(controls);
+            
+            // 添加到网格
+            videoGrid.appendChild(card);
+        });
+        
+        // 添加页面加载后的效果
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.video-card');
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.opacity = 0;
+                    card.style.transform = 'translateY(20px)';
+                    card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    
+                    setTimeout(() => {
+                        card.style.opacity = 1;
+                        card.style.transform = 'translateY(0)';
+                    }, 50);
+                }, 100 * index);
+            });
+        });
+    </script>
+</body>
+</html>
