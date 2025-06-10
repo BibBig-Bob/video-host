@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stripe Texture Random</title>
+    <title>Noise Texture Random</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -196,7 +196,7 @@
 <body>
     <div class="container">
         <header>
-            <h1><i class="fas fa-video"></i> Stripe Texture Random</h1>
+            <h1><i class="fas fa-video"></i> Noise Texture Random</h1>
             <p class="subtitle">This page displays multiple video files. Click the play button to watch them. It supports full screen playback and individual control of each video.</p>
         </header>
         
@@ -212,27 +212,19 @@
     <script>
         // 视频文件列表
         const videos = [
-            "stripe_video.mp4",
-            "stripe_camRandom.mp4",
-            "stripe_camRandom_changing.mp4",
-            "stripe_changing.mp4",
-            "stripe_color.mp4",
-            "stripe_color_camRandom.mp4",
-            "stripe_color_camRandom_changing.mp4",
-            "stripe_color_changing.mp4"
+            "noise.mp4",
+            "noise_camRandom.mp4",
+            "noise_color.mp4",
+            "noise_color_camRandom.mp4"
         ];
         
         // 友好的视频标题
         const videoTitles = {
-            "stripe_video.mp4": "Stripe texture randomization",
-            "stripe_camRandom.mp4": "Stripe + Camera Offset",
-            "stripe_camRandom_changing.mp4": "Stripe with changing angle + Camera Offset",
-            "stripe_changing.mp4": "Stripe with changing angle",
-            "stripe_color.mp4": "Stripe + Color randomization",
-            "stripe_color_camRandom.mp4": "Stripe + Color randomization + Camera Offset",
-            "stripe_color_camRandom_changing.mp4": "Stripe with changing angle + Color randomization + Camera Offset",
-            "stripe_color_changing.mp4": "Stripe with changing angle + Color randomization"
-        };
+            "noise.mp4": "Noise texture randomization",
+            "noise_camRandom.mp4": "Noise + Camera Offset",
+            "noise_color.mp4": "Noise + Color randomization",
+            "noise_color_camRandom.mp4": "Noise + Color randomization + Camera Offset"
+        };  
         
         // 获取视频网格容器
         const videoGrid = document.querySelector('.video-grid');
