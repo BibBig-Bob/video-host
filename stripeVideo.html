@@ -74,9 +74,14 @@
             text-align: center;
             font-weight: 500;
             background: rgba(0, 0, 0, 0.2);
-            word-wrap: break-word;
-            word-break: break-word;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;      /* 限制为两行 */
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            height: 3.2em;               /* 2 行 × 行高约 1.6em */
         }
+
         
         .video-container {
             position: relative;
