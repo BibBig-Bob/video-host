@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>视频画廊展示</title>
+    <title>Grid Texture Random</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -192,8 +192,8 @@
 <body>
     <div class="container">
         <header>
-            <h1><i class="fas fa-video"></i> 视频画廊展示</h1>
-            <p class="subtitle">此页面展示了多个视频文件，点击播放按钮即可观看。支持全屏播放和单独控制每个视频。</p>
+            <h1><i class="fas fa-video"></i> Grid Texture Random</h1>
+            <p class="subtitle">This page displays multiple video files. Click the play button to watch them. It supports full screen playback and individual control of each video.</p>
         </header>
         
         <div class="video-grid">
@@ -201,7 +201,7 @@
         </div>
         
         <div class="footer">
-            <p>视频画廊展示页面 | 支持所有现代浏览器 | 响应式设计</p>
+            <p>Video gallery display page | Supports all modern browsers | Responsive design</p>
         </div>
     </div>
 
@@ -220,14 +220,14 @@
         
         // 友好的视频标题
         const videoTitles = {
-            "grid.mp4": "网格基础模式",
-            "grid_camRandom.mp4": "随机相机视角",
-            "grid_camRandom_changing.mp4": "动态随机相机",
-            "grid_changing.mp4": "动态网格变化",
-            "grid_color.mp4": "彩色网格",
-            "grid_color_camRandom.mp4": "彩色随机视角",
-            "grid_color_camRandom_changing.mp4": "彩色动态相机",
-            "grid_color_changing.mp4": "彩色动态网格"
+            "grid.mp4": "Grid texture randomization",
+            "grid_camRandom.mp4": "Grid + Camera Offset",
+            "grid_camRandom_changing.mp4": "Gird with changing angle + Camera Offset",
+            "grid_changing.mp4": "Gird with changing angle",
+            "grid_color.mp4": "Grid + Color randomization",
+            "grid_color_camRandom.mp4": "Grid + Color randomization + Camera Offset",
+            "grid_color_camRandom_changing.mp4": "Gird with changing angle + Color randomization + Camera Offset",
+            "grid_color_changing.mp4": "Gird with changing angle + Color randomization"
         };
         
         // 获取视频网格容器
@@ -259,15 +259,15 @@
             
             const playBtn = document.createElement('button');
             playBtn.className = 'btn btn-play';
-            playBtn.innerHTML = '<i class="fas fa-play"></i> 播放';
+            playBtn.innerHTML = '<i class="fas fa-play"></i> Start';
             
             const pauseBtn = document.createElement('button');
             pauseBtn.className = 'btn btn-pause';
-            pauseBtn.innerHTML = '<i class="fas fa-pause"></i> 暂停';
+            pauseBtn.innerHTML = '<i class="fas fa-pause"></i> Stop';
             
             const fullscreenBtn = document.createElement('button');
             fullscreenBtn.className = 'btn btn-fullscreen';
-            fullscreenBtn.innerHTML = '<i class="fas fa-expand"></i> 全屏';
+            fullscreenBtn.innerHTML = '<i class="fas fa-expand"></i> Full Screen';
             
             // 添加事件监听器
             playBtn.addEventListener('click', () => {
